@@ -1,0 +1,49 @@
+#!/bin/sh
+
+cd /usr/etc
+
+if [ ! -d "map" ]; then
+	 mkdir map
+fi
+
+if [ -f "map.zip" ]; then
+	 cd map
+	 rm *
+	 cd /usr/etc
+	 unzip -q map.zip -d map
+	 rm map.zip
+	 rm zbmp.db
+	 rm zmap*
+	 rm win.pgf
+fi
+
+cd /opt
+chmod +x akbd
+chmod +x daemon_akb
+
+if [ -e "ui.tar.gz" ]; then
+	if [ -e "ui" ]; then
+		rm -rf ui
+	fi
+	tar zxf ui.tar.gz
+	rm ui.tar.gz
+fi
+
+tar zxf /opt/font.tar.gz -C /home
+tar zxf /opt/cgi-bin.tar.gz -C /www
+cp /opt/akbd /home
+cp /opt/daemon_akb /home
+
+mount -t vfat -o codepage=936,iocharset=cp936 /dev/mmcblk0p1 /sdcard
+
+if [ $? = 0 ]; then
+	mount -o remount,rw /dev/mmcblk0p1
+	echo "sdcard plugged in"
+	cd /home
+	./daemon_akb 0
+else
+	echo "no sdcard"
+	cd /home
+	./daemon_akb 1
+fi
+

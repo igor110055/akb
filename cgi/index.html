@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>WS-H960室内机登录界面</title>
+<script type="text/javascript" src="md5.js"></script>  
+<script type="text/javascript">
+function trans(){
+	var oU, oP;
+	oU = document.getElementById("user");
+	oP = document.getElementById("passwd");
+	if ((oU.value.length > 0)&&(oP.value.length > 0))
+	{
+		oU.value = hex_md5(oU.value);
+		oP.value = hex_md5(oP.value);
+		return true;
+	}
+	else
+	{
+		alert("请输入用户名和密码!");
+		return false;
+	}
+}
+
+function clear()
+{
+	var oU, oP;
+	oU = document.getElementById("user");
+	oP = document.getElementById("passwd");
+	oU.value = "";
+	oP.value = "";
+}
+
+</script>
+<STYLE type=text/css>
+	BODY {
+		BACKGROUND-COLOR: #6699ff
+	}
+	</STYLE>
+</head>
+
+<body onload="clear()">
+<table width="100%" border="0">
+  <tr>
+    <td width="25%" height="15">&nbsp;</td>
+    <td width="52%">&nbsp;</td>
+    <td width="5%">&nbsp;</td>
+    <td width="18%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="142">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="213">&nbsp;</td>
+    <td>
+    	<table width="100%" border="0" >
+    	<form name="auth" method="post" action="/cgi-bin/set.cgi" >
+      <tr>
+        <td width="27%" height="38">&nbsp;</td>
+        <td width="51%" style="font-weight:bold;color:#FFFFFF">管理员登录</td>
+        <td width="22%">&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="26" align="center" style="font-weight:bold;color:#FFFFFF">&nbsp;用户名：</td>
+        <td><label>
+          <input name="user" id="user" type="text" style="width:130px ; height:20px"/>
+        </label></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="25" align="center"style="font-weight:bold;color:#FFFFFF">&nbsp;密 &nbsp;码：</td>
+        <td><label>
+          <input name="passwd" id="passwd" type="password" style=" height:20px;width:130px"/>
+        </label></td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td height="30"><input type='hidden' name='cstage' value='0' /></td>
+        <td><label>
+          <input type="submit" onclick="return trans();" value="登录" />
+        </label><label><input type="reset" value="重置" /></label></td>
+        <td>&nbsp;</td>
+      </tr>
+      </form>
+    </table>
+    </td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="275">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>
